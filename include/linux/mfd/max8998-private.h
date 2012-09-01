@@ -48,6 +48,7 @@ enum {
 	MAX8998_REG_ONOFF2,
 	MAX8998_REG_ONOFF3,
 	MAX8998_REG_ONOFF4,
+
 	MAX8998_REG_BUCK1_VOLTAGE1,
 	MAX8998_REG_BUCK1_VOLTAGE2,
 	MAX8998_REG_BUCK1_VOLTAGE3,
@@ -299,6 +300,7 @@ struct max8998_dev {
 	int ono;
 	u8 irq_masks_cur[MAX8998_NUM_IRQ_REGS];
 	u8 irq_masks_cache[MAX8998_NUM_IRQ_REGS];
+
 	int type;
 	bool wakeup;
 };
@@ -306,6 +308,9 @@ struct max8998_dev {
 int max8998_irq_init(struct max8998_dev *max8998);
 void max8998_irq_exit(struct max8998_dev *max8998);
 int max8998_irq_resume(struct max8998_dev *max8998);
+
+
+extern int max8998_bulk_read(struct i2c_client *i2c, u8 reg, int count, u8 *buf);
 
 extern int max8998_read_reg(struct i2c_client *i2c, u8 reg, u8 *dest);
 extern int max8998_bulk_read(struct i2c_client *i2c, u8 reg, int count,

@@ -84,6 +84,12 @@ struct max8998_charger_callbacks {
 		enum cable_type_t status);
 };
 
+#ifdef CONFIG_MACH_WAVE
+struct max8998_power_callbacks {
+	void (*power_off)(struct max8998_power_callbacks *ptr);
+};
+#endif
+
 /**
  * max8998_charger_data - charger data
  * @id: charger id
@@ -91,6 +97,7 @@ struct max8998_charger_callbacks {
  * @adc_table: adc_table must be ascending adc value order
  */
 struct max8998_charger_data {
+
 	struct power_supply *psy_fuelgauge;
 	void (*register_callbacks)(struct max8998_charger_callbacks *ptr);
 	struct max8998_adc_table_data *adc_table;
@@ -126,6 +133,7 @@ struct max8998_platform_data {
 	int				num_regulators;
 	int				irq_base;
 	int				ono;
+
 	bool				buck_voltage_lock;
 	int				buck1_voltage1;
 	int				buck1_voltage2;
@@ -141,6 +149,9 @@ struct max8998_platform_data {
 	bool				wakeup;
 	bool				rtc_delay;
 	struct max8998_charger_data	*charger;
+#ifdef CONFIG_MACH_WAVE
+	struct max8998_power_callbacks **power_callbacks;
+#endif
 };
 
 // FOR DIRECT API

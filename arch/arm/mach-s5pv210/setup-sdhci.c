@@ -28,6 +28,10 @@
 #include <mach/regs-gpio.h>
 #include <mach/gpio.h>
 
+#ifdef CONFIG_MACH_WAVE
+#include <mach/gpio-wave.h>
+#endif
+
 #include "herring.h"
 
 /* clock sources for the mmc bus clock, order as for the ctrl2[5..4] */
@@ -145,10 +149,11 @@ void s5pv210_adjust_sdhci_cfg_card(struct s3c_sdhci_platdata *pdata,
 void universal_sdhci2_cfg_ext_cd(void)
 {
 	printk(KERN_DEBUG "Universal :SD Detect configuration\n");
-#if defined(CONFIG_SAMSUNG_CAPTIVATE) || defined(CONFIG_SAMSUNG_VIBRANT)
-    s3c_gpio_setpull(S5PV210_GPH3(4), S3C_GPIO_PULL_UP);
+#if defined(CONFIG_MACH_WAVE)
+    s3c_gpio_setpull(GPIO_T_FLASH_DETECT, S3C_GPIO_PULL_NONE);
 #else
     s3c_gpio_setpull(S5PV210_GPH3(4), S3C_GPIO_PULL_NONE);
+#endif
 #endif
 	irq_set_irq_type(IRQ_EINT(28), IRQ_TYPE_EDGE_BOTH);
 }
@@ -242,13 +247,15 @@ EXPORT_SYMBOL_GPL(sdhci_s3c_force_presence_change);
 void s3c_sdhci_set_platdata(void)
 {
 #if defined(CONFIG_S3C_DEV_HSMMC)
-	if (machine_is_herring() || machine_is_aries()) { /* TODO: move to mach-herring.c */
+	if (machine_is_herring() || machine_is_aries() || machine_is_wave() || machine_is_wave2())  {
+
 		hsmmc0_platdata.cd_type = S3C_SDHCI_CD_PERMANENT;
 	}
 	s3c_sdhci0_set_platdata(&hsmmc0_platdata);
 #endif
 #if defined(CONFIG_S3C_DEV_HSMMC1)
-	if (machine_is_aries()) {
+	if (machine_is_aries() || machine_is_wave() || machine_is_wave2()) {
+
 		hsmmc1_platdata.cd_type = S3C_SDHCI_CD_EXTERNAL;
 		hsmmc1_platdata.ext_cd_init = ext_cd_init_hsmmc1;
 		hsmmc1_platdata.ext_cd_cleanup = ext_cd_cleanup_hsmmc1;
@@ -275,15 +282,25 @@ void s3c_sdhci_set_platdata(void)
 
 	if (machine_is_aries()) {
 		hsmmc2_platdata.cd_type = S3C_SDHCI_CD_GPIO;
-		hsmmc2_platdata.ext_cd_gpio = S5PV210_GPH3(4);
+                hsmmc2_platdata.ext_cd_gpio = S5PV210_GPH3(4);
 		hsmmc2_platdata.ext_cd_gpio_invert = true;
 		universal_sdhci2_cfg_ext_cd();
 	}
-
+	else if(machine_is_wave() || machine_is_wave2())
+	{
+		/* There is T-Flash detect GPIO on Wave board,
+		 * but appears to be not working on some boards.
+		 * We don't know how to recognize faulty boards,
+		 * so let's force SDHCI_QUIRK_BROKEN_CARD_DETECTION
+		 * card will be polled by SDHCI driver.*/
+		hsmmc2_platdata.cd_type = S3C_SDHCI_CD_NONE;
+	}
 	s3c_sdhci2_set_platdata(&hsmmc2_platdata);
 #endif
 #if defined(CONFIG_S3C_DEV_HSMMC3)
-	if (machine_is_herring() || machine_is_aries()) {
+
+	if (machine_is_herring() || machine_is_aries() || machine_is_wave() || machine_is_wave2()) {
+
 		hsmmc3_platdata.cd_type = S3C_SDHCI_CD_EXTERNAL;
 		hsmmc3_platdata.ext_cd_init = ext_cd_init_hsmmc3;
 		hsmmc3_platdata.ext_cd_cleanup = ext_cd_cleanup_hsmmc3;

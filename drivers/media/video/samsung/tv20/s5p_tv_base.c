@@ -604,6 +604,7 @@ int s5p_tv_v_release(struct file *filp)
 #endif
 
 	s5p_tv_clk_gate(false);
+
 	tv_phy_power(false);
 
 	return 0;
@@ -1289,7 +1290,9 @@ void s5p_tv_early_suspend(struct early_suspend *h)
 
 		/* clk & power off */
 		s5p_tv_clk_gate(false);
-		if ((s5ptv_status.tvout_param.out_mode == TVOUT_OUTPUT_HDMI) ||\
+
+		if ((s5ptv_status.tvout_param.out_mode == TVOUT_OUTPUT_HDMI) ||
+
 		(s5ptv_status.tvout_param.out_mode == TVOUT_OUTPUT_HDMI_RGB))
 			tv_phy_power(false);
 
@@ -1325,6 +1328,7 @@ void s5p_tv_late_resume(struct early_suspend *h)
 
 		/* clk & power on */
 		s5p_tv_clk_gate(true);
+
 		if ((s5ptv_status.tvout_param.out_mode == TVOUT_OUTPUT_HDMI) ||\
 		(s5ptv_status.tvout_param.out_mode == TVOUT_OUTPUT_HDMI_RGB))
 			tv_phy_power(true);

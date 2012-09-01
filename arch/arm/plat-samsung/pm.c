@@ -57,6 +57,7 @@ struct pmstats {
 static struct pmstats *pmstats;
 static struct pmstats *pmstats_last;
 
+
 static ssize_t pmstats_read(struct file *file, char __user *buf,
 			    size_t len, loff_t *offset)
 {

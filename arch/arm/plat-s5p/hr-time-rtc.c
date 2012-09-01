@@ -431,6 +431,7 @@ unsigned long long sched_clock(void)
 static void s5p_timer_setup(void)
 {
 	unsigned long rate;
+
 	unsigned int tmp;
 
 	/* Setup event timer using XrtcXTI */

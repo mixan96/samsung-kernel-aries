@@ -101,6 +101,7 @@ int fimc_outdev_stop_streaming(struct fimc_control *ctrl, struct fimc_ctx *ctx)
 		break;
 	case FIMC_OVLY_NONE_SINGLE_BUF:		/* fall through */
 	case FIMC_OVLY_NONE_MULTI_BUF:
+
 		if (ctx->status == FIMC_STREAMON_IDLE)
 			ctx->status = FIMC_STREAMOFF;
 		else
@@ -145,6 +146,7 @@ int fimc_outdev_resume_dma(struct fimc_control *ctrl, struct fimc_ctx *ctx)
 	win->owner = DMA_MEM_OTHER;
 	win->other_mem_addr = ctx->dst[1].base[FIMC_ADDR_Y];
 	win->other_mem_size = ctx->dst[1].length[FIMC_ADDR_Y];
+
 
 	/* Update WIN size */
 	var.xres_virtual = fimd_rect.width;
@@ -862,6 +864,7 @@ static int fimc_outdev_set_dst_dma_size(struct fimc_control *ctrl,
 		break;
 
 	case FIMC_OVLY_DMA_MANUAL:	/* fall through */
+
 	case FIMC_OVLY_DMA_AUTO:
 		real.width = ctx->win.w.width;
 		real.height = ctx->win.w.height;
@@ -1249,6 +1252,7 @@ int fimc_reqbufs_output(void *fh, struct v4l2_requestbuffers *b)
 			if (ret)
 				return ret;
 		} else if (b->memory == V4L2_MEMORY_USERPTR) {
+
 			if (mode == FIMC_OVLY_DMA_AUTO)
 				ctx->overlay.req_idx = FIMC_USERPTR_IDX;
 		}
@@ -1641,6 +1645,7 @@ int fimc_streamon_output(void *fh)
 	if (ctx->overlay.mode == FIMC_OVLY_NOT_FIXED)
 		ctx->overlay.mode = FIMC_OVLY_MODE;
 
+
 	/* initialize destination buffers */
 	if (ctx->overlay.mode == FIMC_OVLY_DMA_AUTO) {
 		ret = fimc_outdev_set_dst_buf(ctrl, ctx);
@@ -1926,6 +1931,7 @@ static int fimc_qbuf_output_dma_auto(struct fimc_control *ctrl,
 		win->other_mem_addr = ctx->dst[1].base[FIMC_ADDR_Y];
 		win->other_mem_size = ctx->dst[1].length[FIMC_ADDR_Y];
 
+
 		/* Update WIN size */
 		var.xres_virtual = fimd_rect.width;
 		var.yres_virtual = fimd_rect.height;
@@ -2072,6 +2078,7 @@ int fimc_qbuf_output(void *fh, struct v4l2_buffer *b)
 		fimc_clk_en(ctrl, true);
 
 		ctx = &ctrl->out->ctx[ctx_num];
+
 		if (ctx_num != ctrl->out->last_ctx) {
 			ctrl->out->last_ctx = ctx->ctx_num;
 			fimc_outdev_set_ctx_param(ctrl, ctx);

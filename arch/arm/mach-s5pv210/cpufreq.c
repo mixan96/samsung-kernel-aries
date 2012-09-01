@@ -108,6 +108,7 @@ static unsigned int g_dvfslockval[DVFS_LOCK_TOKEN_NUM];
 unsigned long arm_volt_max = 1350000;
 unsigned long int_volt_max = 1250000;
 #else
+
 const unsigned long arm_volt_max = 1350000;
 const unsigned long int_volt_max = 1250000;
 #endif

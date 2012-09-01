@@ -121,6 +121,7 @@ static void max8998_irq_sync_unlock(struct irq_data *data)
 		 */
 		if (max8998->irq_masks_cur[i] != max8998->irq_masks_cache[i]) {
 			max8998->irq_masks_cache[i] = max8998->irq_masks_cur[i];
+
 			max8998_write_reg(max8998->i2c, MAX8998_REG_IRQM1 + i,
 					max8998->irq_masks_cur[i]);
 		}
@@ -215,6 +216,7 @@ int max8998_irq_init(struct max8998_dev *max8998)
 	for (i = 0; i < MAX8998_NUM_IRQ_REGS; i++) {
 		max8998->irq_masks_cur[i] = 0xff;
 		max8998->irq_masks_cache[i] = 0xff;
+
 		max8998_write_reg(max8998->i2c, MAX8998_REG_IRQM1 + i, 0xff);
 	}
 
@@ -259,6 +261,7 @@ int max8998_irq_init(struct max8998_dev *max8998)
 
 void max8998_irq_exit(struct max8998_dev *max8998)
 {
+
 	if (max8998->ono)
 		free_irq(max8998->ono, max8998);
 

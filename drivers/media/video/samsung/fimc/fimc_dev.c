@@ -147,6 +147,7 @@ static inline u32 fimc_irq_out_single_buf(struct fimc_control *ctrl,
 		ctrl->out->idxs.active.ctx = -1;
 		ctrl->out->idxs.active.idx = -1;
 		ctx->status = FIMC_STREAMOFF;
+
 		ctrl->status = FIMC_STREAMOFF;
 
 		return wakeup;
@@ -255,6 +256,7 @@ static inline u32 fimc_irq_out_dma(struct fimc_control *ctrl,
 		ctrl->out->idxs.active.ctx = -1;
 		ctrl->out->idxs.active.idx = -1;
 		ctx->status = FIMC_STREAMOFF;
+
 		ctrl->status = FIMC_STREAMOFF;
 		return wakeup;
 	}
@@ -633,6 +635,7 @@ int fimc_mmap_out_dst(struct file *filp, struct vm_area_struct *vma, u32 idx)
 	vma->vm_page_prot = pgprot_noncached(vma->vm_page_prot);
 	vma->vm_flags |= VM_RESERVED;
 
+
 	pfn = __phys_to_pfn(ctrl->out->ctx[ctx_id].dst[idx].base[0]);
 	ret = remap_pfn_range(vma, vma->vm_start, pfn, size, vma->vm_page_prot);
 	if (ret != 0)
@@ -988,6 +991,7 @@ static int fimc_release(struct file *filp)
 	struct mm_struct *mm = current->mm;
 	struct fimc_ctx *ctx;
 	int ret = 0, i;
+
 	ctx = &ctrl->out->ctx[ctx_id];
 
 	pdata = to_fimc_plat(ctrl->dev);

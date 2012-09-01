@@ -90,6 +90,7 @@ typedef enum
 	mDNIe_CAMERA_MODE,
 	mDNIe_NAVI,
 	mDNIe_BYPASS_MODE
+
 }Lcd_mDNIe_UI;
 
 struct class *mdnieset_ui_class;
@@ -99,6 +100,7 @@ struct device *switch_mdnieset_outdoor_dev;
 
 mDNIe_data_type mDNIe_Video[]= 
 {
+
 	{0x0084, 0x0040},
 	{0x0090, 0x0000},
 	{0x0094, 0x0fff},
@@ -115,6 +117,7 @@ mDNIe_data_type mDNIe_Video[]=
 
 mDNIe_data_type mDNIe_Camera[]= 
 {
+
 	{0x0084, 0x0040},
 	{0x0090, 0x0000},
 	{0x0094, 0x0FFF},
@@ -131,6 +134,7 @@ mDNIe_data_type mDNIe_Camera[]=
 
 mDNIe_data_type mDNIe_Camera_Outdoor_Mode[]= 
 {
+
 	{0x0084, 0x0090},
 	{0x0090, 0x0000},
 	{0x0094, 0x0FFF},
@@ -143,6 +147,7 @@ mDNIe_data_type mDNIe_Camera_Outdoor_Mode[]=
 	{0x0194, 0x0011},
 	{END_SEQ, 0x0000},
 };
+
 
 mDNIe_data_type mDNIe_Bypass[]=
 {
@@ -158,6 +163,7 @@ mDNIe_data_type mDNIe_Bypass[]=
 
 mDNIe_data_type mDNIe_UI[]=
 {
+
 	{0x0084, 0x0040},
 	{0x0090, 0x0000},
 	{0x0094, 0x0fff},
@@ -175,6 +181,7 @@ mDNIe_data_type mDNIe_UI[]=
 
 mDNIe_data_type mDNIe_Video_Warm[]= 
 {
+
 	{0x0084, 0x0020},
 	{0x0090, 0x0000},
 	{0x0094, 0x0fff},
@@ -190,6 +197,7 @@ mDNIe_data_type mDNIe_Video_Warm[]=
 
 mDNIe_data_type mDNIe_Video_WO_Mode[]= 
 {
+
 	{0x0084, 0x0090},
 	{0x0090, 0x0000},
 	{0x0094, 0x0fff},
@@ -205,6 +213,7 @@ mDNIe_data_type mDNIe_Video_WO_Mode[]=
 
 mDNIe_data_type mDNIe_Video_Cold[]= 
 {
+
 	{0x0084, 0x0020},
 	{0x0090, 0x0000},
 	{0x0094, 0x0fff},
@@ -220,6 +229,7 @@ mDNIe_data_type mDNIe_Video_Cold[]=
 
 mDNIe_data_type mDNIe_Video_CO_Mode[]= 
 {
+
 	{0x0084, 0x0090},
 	{0x0090, 0x0000},
 	{0x0094, 0x0fff},
@@ -235,6 +245,7 @@ mDNIe_data_type mDNIe_Video_CO_Mode[]=
 
 mDNIe_data_type mDNIe_Outdoor_Mode[]= 
 {
+
 	{0x0084, 0x0090},
 	{0x0090, 0x0000},
 	{0x0094, 0x0fff},
@@ -557,6 +568,7 @@ void mDNIe_Set_Mode(Lcd_mDNIe_UI mode, u8 mDNIe_Outdoor_OnOff)
 		}
 
 		current_mDNIe_UI = mode;
+
 		if(current_mDNIe_UI == mDNIe_UI_MODE || current_mDNIe_UI == mDNIe_BYPASS_MODE)
 			current_mDNIe_OutDoor_OnOff = FALSE;
 		else
@@ -682,7 +694,6 @@ static ssize_t mdnieset_ui_file_cmd_store(struct device *dev,
 
 		case SIG_MDNIE_NAVI:
 			current_mDNIe_UI = mDNIe_NAVI;
-			break;
 
 		case SIG_MDNIE_BYPASS_MODE:
 			current_mDNIe_UI = mDNIe_BYPASS_MODE;
@@ -1181,6 +1192,7 @@ void s5p_mdine_pwm_enable(int on)
 
 	if(on)
 		{
+
 		data = s3c_mdnie_readw(0x0084);
 		data = data | 0x0010;		
 		s3c_mdnie_writel(data,0x0084);		// on

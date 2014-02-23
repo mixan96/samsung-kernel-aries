@@ -1,8 +1,8 @@
 VERSION = 3
 PATCHLEVEL = 0
-SUBLEVEL = 8
+SUBLEVEL = 101
 EXTRAVERSION =
-NAME = Sneaky Weasel
+NAME = Sodden Ben Lomond
 
 # *DOCUMENTATION*
 # To see a list of typical targets execute "make help"
@@ -368,7 +368,8 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -fno-strict-aliasing -fno-common \
 		   -Werror-implicit-function-declaration \
 		   -Wno-format-security \
-		   -fno-delete-null-pointer-checks
+		   -fno-delete-null-pointer-checks \
+		   -mtune=cortex-a8 -mfpu=neon -ftree-vectorize -mfloat-abi=softfp
 KBUILD_AFLAGS_KERNEL :=
 KBUILD_CFLAGS_KERNEL :=
 KBUILD_AFLAGS   := -D__ASSEMBLY__

@@ -36,10 +36,7 @@
  * MFC_FW_TOTAL_BUF_SIZE should be aligned to 4KB (page size)
  */
 #define MFC_FW_TOTAL_BUF_SIZE (ALIGN_TO_4KB(MFC_FW_MAX_SIZE + MFC_MAX_INSTANCE_NUM * MFC_FW_BUF_SIZE))
-<<<<<<< HEAD
-=======
-#if defined(CONFIG_MACH_ARIES) || defined(CONFIG_MACH_WAVE)
->>>>>>> def4373... wave: Add support for MACH_WAVE
+
 #define MFC_FW_MAX_SIZE       (512 * 1024)     /* 512KB : 512x1024                   */
 #define MFC_FW_BUF_SIZE       (512 * 1024)     /* 512KB : 512x1024 size per instance */
 

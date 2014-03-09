@@ -548,8 +548,6 @@ config OPTICAL_GP2A
 	help
 	  This option enables proximity & light sensors using gp2a driver.
 
-<<<<<<< HEAD
-=======
 config GP2A_PROX_ONLY
 	depends on I2C && GENERIC_GPIO
 	tristate "GP2A ambient proximity input device"
@@ -588,5 +586,4 @@ config INPUT_L3G4200D
 	  This option enables gyro sensors using L3G4200D driver
 	  It is optimized for s5pc11x
 
->>>>>>> def4373... wave: Add support for MACH_WAVE
 endif

@@ -1280,7 +1280,7 @@ Also let tl2796 initialize using the actual lcd->bl default
 
 
 	tl2796_ldi_enable(lcd);
-#endif
+
 #ifdef CONFIG_HAS_EARLYSUSPEND
 	lcd->early_suspend.suspend = tl2796_early_suspend;
 	lcd->early_suspend.resume = tl2796_late_resume;

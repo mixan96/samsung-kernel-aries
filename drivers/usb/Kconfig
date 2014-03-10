@@ -120,7 +120,7 @@ source "drivers/usb/musb/Kconfig"
 
 source "drivers/usb/renesas_usbhs/Kconfig"
 
-source "drivers/usb/dwc/Kconfig"
+# source "drivers/usb/dwc/Kconfig"
 
 source "drivers/usb/class/Kconfig"
 

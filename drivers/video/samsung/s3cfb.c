@@ -43,9 +43,9 @@
 
 #ifdef CONFIG_MACH_ARIES
 #include "logo_rgb24_wvga_portrait.h"
-
-#include <mach/regs-clock.h>
 #endif
+#include <mach/regs-clock.h>
+
 
 #if defined(CONFIG_MACH_WAVE)
 #include <asm/mach-types.h>

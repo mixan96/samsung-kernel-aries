@@ -395,7 +395,7 @@ static void fsa9480_detect_dev(struct fsa9480_usbsw *usbsw)
                                 dev_err(&client->dev,
                                         "%s: err %d\n", __func__, ret);
 #endif
-#else
+
 
 			ret = i2c_smbus_write_byte_data(client,
 					FSA9480_REG_MANSW1, SW_DHOST);
@@ -447,7 +447,7 @@ static void fsa9480_detect_dev(struct fsa9480_usbsw *usbsw)
                         if (ret < 0)
                                 dev_err(&client->dev,
                                         "%s: err %d\n", __func__, ret);
-#endif
+
 
 		}
 	/* Detached */

@@ -154,7 +154,6 @@ void universal_sdhci2_cfg_ext_cd(void)
 #else
     s3c_gpio_setpull(S5PV210_GPH3(4), S3C_GPIO_PULL_NONE);
 #endif
-#endif
 	irq_set_irq_type(IRQ_EINT(28), IRQ_TYPE_EDGE_BOTH);
 }
 
